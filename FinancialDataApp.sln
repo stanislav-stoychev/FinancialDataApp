@@ -20,6 +20,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OutboxService", "OutboxServ
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FinancialDataApi", "FinancialDataApi\FinancialDataApi.csproj", "{6ABE0EC6-3421-49F5-9CBA-CFFB10CF10FE}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".aspnet", ".aspnet", "{8E521451-6818-4664-9FC6-3C3696DF61CE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "https", "https", "{01B5F5CD-F204-496C-966F-356C968B0BA3}"
+	ProjectSection(SolutionItems) = preProject
+		.aspnet\https\aspnetapp.pfx = .aspnet\https\aspnetapp.pfx
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -53,6 +60,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{01B5F5CD-F204-496C-966F-356C968B0BA3} = {8E521451-6818-4664-9FC6-3C3696DF61CE}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {97E4911B-10E4-4BAA-BCD6-0DE09E274B9E}
