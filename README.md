@@ -30,7 +30,7 @@ Notes:
 
 Links using defaut config:
 1. Swagger: https://localhost:8001/swagger/index.html
-2. Ws: ws://localhost:8000/news-feed
+2. Ws: ws://localhost:8000/news-feed (Example message for connecting: "{"protocol":"json","version":1}", subscribing: "{"arguments":["AAPL"],"target":"Subscribe","type":1}")
 3. RabbitMq: http://localhost:15672/
 4. Kibana: http://localhost:5601/
 5. Jaeger: http://localhost:16686/
