@@ -1,6 +1,6 @@
 # FinancialDataApp
 
-FinancialDataApp application uses event driven architecture + REST in order to fullfill the requrements. It consists of 3 custom microservices and 5 commercial ones.
+FinancialDataApp application uses event driven architecture + REST in order to fullfill the requrements. Pulled market data is saved to the database and streamed to subscribed clients (using RabbitMQ + MassTransit + SignalR). It consists of 3 custom microservices and 5 commercial ones.
 
 Custom ones:
 1. DataPullService - Worker service which uses scheduled job (https://www.quartz-scheduler.net/) to pull market data periodically (https://polygon.io/). Retrieved data is saved to SQL Server.
@@ -36,3 +36,19 @@ Links using defaut config:
 4. Kibana: http://localhost:5601/
 5. Jaeger: http://localhost:16686/
 
+Alternative solution would be replacing components/tehcnologies with different ones
+
+1.1. Switch RMQ for Kafka Pros:
+  - Faster streaming
+  - Has retention period for messages
+
+1.2. Switch RMQ for Kafka Cons:
+  - Pull based conusmers
+  - No brokering capabilities
+
+2.1. Switch SignalR for GRP Pros:
+  - Faster data transfer
+  - Better scaling
+
+2.2. Switch SignalR for GRP Cons:
+  - Harder to use
