@@ -15,8 +15,7 @@ External:
 5. Jaeger - Trace visualization
 
 Diagram:
-
-![image](https://github.com/stanislav-stoychev/FinancialDataApp/assets/61232261/c5795294-9b72-46a4-9832-f19602e4e4e5)
+![Alt text](https://github.com/stanislav-stoychev/FinancialDataApp/blob/master/Diagram.png?raw=true "Diagram")
 
 Running the application requires having RMQ, ES, SQL Server, Kibana and Jaeger instances. If not present at given machine there is a option to use docker. (Docker files and docker-compose are included in the solution)
 
