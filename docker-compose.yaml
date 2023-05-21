@@ -1,0 +1,135 @@
+version: "3.9"
+
+services:
+
+# infra services
+  sqlServer:
+    image: mcr.microsoft.com/mssql/server
+    ports:
+      - 1433:1433
+    environment:
+     SA_PASSWORD: "SuperStr0ngPassw0rd"
+     ACCEPT_EULA: "Y"
+    restart: on-failure
+    volumes:
+     - 'c:/sql-server/data:/var/opt/mssql/data:rw'
+    healthcheck:
+      test: ["CMD", "/opt/mssql-tools/bin/sqlcmd", "-S . -U sa -P SuperStr0ngPassw0rd -i SELECT 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    hostname: my-rabbit
+    ports:
+      - 5672:5672
+      - 15672:15672
+    restart: on-failure
+    depends_on:
+     - "sqlServer"
+
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.4.0
+    environment:
+      - xpack.security.enabled=false
+      - discovery.type=single-node
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+      nofile:
+        soft: 65536
+        hard: 65536
+    cap_add:
+      - IPC_LOCK
+    restart: on-failure
+    volumes:
+      - "C:/Temp/:/usr/share/elasticsearch/data"
+    ports:
+      - 9200:9200
+      - 9300:9300
+
+  kibana:
+    container_name: kibana
+    image: docker.elastic.co/kibana/kibana:7.4.0
+    environment:
+      - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
+    ports:
+      - 5601:5601
+    depends_on:
+      - elasticsearch
+
+  jaeger:
+    image: jaegertracing/all-in-one
+    restart: on-failure
+    environment:
+        - SPAN_STORAGE_TYPE=elasticsearch
+        - ES_SERVER_URLS=http://elasticsearch:9200
+    ports:
+      - 5775:5775/udp
+      - 5778:5778
+      - 6831:6831/udp
+      - 6832:6832/udp
+      - 9411:9411
+      - 14268:14268
+      - 16686:16686
+    depends_on:
+      - elasticsearch
+
+  outboxService:
+    image: outbox-service
+    build: 
+     context: .
+     dockerfile: OutboxService/Dockerfile
+    environment:
+     - ElasticSearchOptions__Address=http://elasticsearch:9200
+     - OutboxOptions__DataSource=Server=sqlServer,1433;User=sa;Password=SuperStr0ngPassw0rd;
+     - OutboxOptions__RabbitMqOptions__RabbitMQHost=rabbitmq
+     - OutboxOptions__TracingOptions__JaegerHost=jaeger
+    restart: on-failure
+    depends_on:
+     - "rabbitmq"
+     - "sqlServer"
+
+  dataPullService:
+    image: data-pull-service
+    build: 
+     context: .
+     dockerfile: DataPullService/Dockerfile
+    environment:
+     - ElasticSearchOptions__Address=http://elasticsearch:9200
+     - DataPullServiceOptions__DataSource=Server=sqlServer,1433;User=sa;Password=SuperStr0ngPassw0rd;
+     - DataPullServiceOptions__RabbitMqOptions__RabbitMQHost=rabbitmq
+     - DataPullServiceOptions__TracingOptions__JaegerHost=jaeger
+    restart: on-failure
+    depends_on:
+     - "rabbitmq"
+     - "sqlServer"
+
+  financialDataApi:
+    image: financial-data-api
+    build: 
+     context: .
+     dockerfile: FinancialDataApi/Dockerfile
+    ports:
+     - "8000:80"
+     - "8001:443"
+    environment:
+     - ConnectionStrings__DefaultConnection=Server=sqlServer,1433;Database=FinancialData;TrustServerCertificate=True;MultipleActiveResultSets=true;User=sa;Password=SuperStr0ngPassw0rd;
+     - ElasticSearchOptions__Address=http://elasticsearch:9200
+     - FinancialDataApiOptions__DataSource=Server=sqlServer,1433;User=sa;Password=SuperStr0ngPassw0rd;
+     - FinancialDataApiOptions__RabbitMqOptions__RabbitMQHost=rabbitmq
+     - FinancialDataApiOptions__TracingOptions__JaegerHost=jaeger
+     - ASPNETCORE_URLS=https://+;http://+
+     - ASPNETCORE_HTTPS_PORT=8001
+     - ASPNETCORE_Kestrel__Certificates__Default__Password=CertPassword
+     - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx
+    volumes:
+     - ./.aspnet/https:/https/
+    restart: on-failure
+    depends_on:
+     - "rabbitmq"
+     - "sqlServer"
+networks:
+ financial-data-app-services:

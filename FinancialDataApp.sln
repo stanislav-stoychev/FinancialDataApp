@@ -1,0 +1,60 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33213.308
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataPullService", "DataPullService\DataPullService.csproj", "{0B7918D7-B3A6-4F96-B5B6-03CBC42BA906}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docker", "Docker", "{C98C1A9A-D4FE-4F58-99EB-0B0AF69C629C}"
+	ProjectSection(SolutionItems) = preProject
+		docker-compose.yaml = docker-compose.yaml
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{10CB1D77-48E1-46B5-97C8-D68BE3105161}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DatabaseContext", "DatabaseContext\DatabaseContext.csproj", "{917CDFA5-7542-43E2-8BBA-414F2AFC4D6D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Events", "Events\Events.csproj", "{47B4A6F4-0E80-4241-9AA5-D59B709EADAA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OutboxService", "OutboxService\OutboxService.csproj", "{EC533504-958E-4321-B2D6-9ED652C77447}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinancialDataApi", "FinancialDataApi\FinancialDataApi.csproj", "{6ABE0EC6-3421-49F5-9CBA-CFFB10CF10FE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0B7918D7-B3A6-4F96-B5B6-03CBC42BA906}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0B7918D7-B3A6-4F96-B5B6-03CBC42BA906}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0B7918D7-B3A6-4F96-B5B6-03CBC42BA906}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0B7918D7-B3A6-4F96-B5B6-03CBC42BA906}.Release|Any CPU.Build.0 = Release|Any CPU
+		{10CB1D77-48E1-46B5-97C8-D68BE3105161}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{10CB1D77-48E1-46B5-97C8-D68BE3105161}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{10CB1D77-48E1-46B5-97C8-D68BE3105161}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{10CB1D77-48E1-46B5-97C8-D68BE3105161}.Release|Any CPU.Build.0 = Release|Any CPU
+		{917CDFA5-7542-43E2-8BBA-414F2AFC4D6D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{917CDFA5-7542-43E2-8BBA-414F2AFC4D6D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{917CDFA5-7542-43E2-8BBA-414F2AFC4D6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{917CDFA5-7542-43E2-8BBA-414F2AFC4D6D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{47B4A6F4-0E80-4241-9AA5-D59B709EADAA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{47B4A6F4-0E80-4241-9AA5-D59B709EADAA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{47B4A6F4-0E80-4241-9AA5-D59B709EADAA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{47B4A6F4-0E80-4241-9AA5-D59B709EADAA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EC533504-958E-4321-B2D6-9ED652C77447}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC533504-958E-4321-B2D6-9ED652C77447}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC533504-958E-4321-B2D6-9ED652C77447}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC533504-958E-4321-B2D6-9ED652C77447}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6ABE0EC6-3421-49F5-9CBA-CFFB10CF10FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6ABE0EC6-3421-49F5-9CBA-CFFB10CF10FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6ABE0EC6-3421-49F5-9CBA-CFFB10CF10FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6ABE0EC6-3421-49F5-9CBA-CFFB10CF10FE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {97E4911B-10E4-4BAA-BCD6-0DE09E274B9E}
+	EndGlobalSection
+EndGlobal
