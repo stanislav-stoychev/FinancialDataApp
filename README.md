@@ -45,9 +45,9 @@ Alternative solution would be replacing components/tehcnologies with different o
   - Pull based conusmers
   - No brokering capabilities
 
-2.1. Switch SignalR for GRP Pros:
+2.1. Switch SignalR for GRPC Pros:
   - Faster data transfer
   - Better scaling
 
-2.2. Switch SignalR for GRP Cons:
+2.2. Switch SignalR for GRPC Cons:
   - Harder to use
