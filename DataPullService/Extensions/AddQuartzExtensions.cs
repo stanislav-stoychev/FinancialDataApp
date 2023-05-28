@@ -1,6 +1,5 @@
 ﻿using DataPullService.Jobs;
 using DataPullService.Options;
-using Microsoft.Extensions.DependencyInjection;
 using Quartz;
 
 namespace DataPullService.Extensions;

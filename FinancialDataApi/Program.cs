@@ -1,12 +1,9 @@
 using FinancialDataApi.Data;
-using FinancialDataApi.Endpoints;
 using FinancialDataApi.Extensions;
 using FinancialDataApi.Hubs;
-using FinancialDataApi.Models;
 using FinancialDataApi.Options;
 using Infrastructure.Extensions;
 using MassTransit.SignalR;
-using Microsoft.AspNetCore.Rewrite;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 
@@ -38,40 +35,6 @@ app.UseHttpsRedirection();
 app.UseRouting();
 app.UseAuthorization();
 
-// Auth enpoints
-app.MapPost("/auth/register", AuthEndpoints.Register)
-    .Produces<string>(StatusCodes.Status400BadRequest)
-    .Produces<RegistrationResponse>(StatusCodes.Status201Created);
-
-app.MapPost("/auth/login", AuthEndpoints.Login)
-    .Produces<string>(StatusCodes.Status400BadRequest)
-    .Produces<AuthenticationResponse>(StatusCodes.Status200OK);
-
-// News endpoints
-app.MapGet("/news/get-all", NewsFeedEndpoints.GetAll)
-    .Produces<List<NewsDto>>(StatusCodes.Status200OK)
-    .RequireAuthorization();
-
-app.MapGet("/news/get-by-date-interval", NewsFeedEndpoints.GetByDateInterval)
-    .Produces<string>(StatusCodes.Status400BadRequest)
-    .Produces<List<NewsDto>>(StatusCodes.Status200OK)
-    .RequireAuthorization();
-
-app.MapGet("/news/get-by-key-word", NewsFeedEndpoints.GetByKeyWord)
-    .Produces<string>(StatusCodes.Status400BadRequest)
-    .Produces<List<NewsDto>>(StatusCodes.Status200OK)
-    .RequireAuthorization();
-
-app.MapGet("/news/get-by-instrument", NewsFeedEndpoints.GetByInstrument)
-    .Produces<string>(StatusCodes.Status400BadRequest)
-    .Produces<List<NewsDto>>(StatusCodes.Status200OK)
-    .RequireAuthorization();
-
-app.MapGet("/news/get-latest", NewsFeedEndpoints.GetLatest)
-    .Produces<List<NewsDto>>(StatusCodes.Status200OK);
-
-// News ws enpoint
-app.MapHub<NewsHub>("/news-feed")
-    .RequireAuthorization();
+app.AddEndpoints();
 
 app.Run();
