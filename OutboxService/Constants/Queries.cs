@@ -2,7 +2,7 @@
 
 public static class Queries
 {
-    public static string GetOutboxRecords = @"
+    public const string GetOutboxRecords = @"
     SELECT 
         TOP {0} *
     FROM
@@ -10,7 +10,7 @@ public static class Queries
     ORDER BY
         [Date]";
 
-    public static string DeleteOutboxRecords = @"
+    public const string DeleteOutboxRecords = @"
     DELETE FROM
         [dbo].[Outbox]
     WHERE 
